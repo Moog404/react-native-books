@@ -8,7 +8,7 @@ export const handleOpenWithLinking = (link) => {
     };
 
 export const handleOpenWithWebBrowser = (link) => {
-        WebBrowser.openBrowserAsync(link);
+        WebBrowser.openBrowserAsync(link, {showInRecents : true});
     };
 
 

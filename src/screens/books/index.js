@@ -19,17 +19,23 @@ export default function books({route, navigation}) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <Header />
-            <View style={{ width: '100%', height: '90%'}}>
+
+            <View style={{ width: '100%', height: '95%'}}>
                 <FlatList
                     data={books}
                     renderItem={({ item, index, separators }) => (
                     <TouchableHighlight
                       key={item.key}
                         onPress={() => navigation.navigate('book', { item })}>
-                        <View>
-                            <Text style={{ color: 'blue'}}>{item.fields["Name"]}</Text>
-                            {item.fields["Cover Photo"] !== undefined && item.fields["Cover Photo"].length > 0 && <Image source={{uri: item.fields["Cover Photo"][0]["url"]}} style={{ width: '20%', height: '100%'}} />}
+                        <View style={{height:130,margin:5,  flexDirection:'row'}}>
+                            <View style={{ width: '20%'}}>
+                                {item.fields["Cover Photo"] !== undefined && item.fields["Cover Photo"].length > 0 && <Image source={{uri: item.fields["Cover Photo"][0]["url"]}} style={{ width: '100%', height: '100%', borderRadius: 10}}/>}
+                            </View>
+                            <View>
+                                <Text style={{fontSize: 18}}>{item.fields["Name"]}</Text>
+                                <Text>{item.fields["Author"]}</Text>
+                                {/*<Text>{item.fields["Synopsis"]}</Text>*/}
+                            </View>
                         </View>
                     </TouchableHighlight>
                   )}

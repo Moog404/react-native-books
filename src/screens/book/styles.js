@@ -12,7 +12,9 @@ export default styles = StyleSheet.create({
         fontSize: 20
     },
     imageSize: {
-        width: 200,
-        height: 400,
+        width: 150,
+        height: 200,
+        borderRadius: 10,
+        margin: 5
     }
 });

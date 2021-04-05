@@ -1,14 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import {StyleSheet, Text, View, Button, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Button, Image, TouchableOpacity, List, TouchableHighlight, ScrollView} from 'react-native';
 import styles from './styles';
 import Header from "../../composants/Header";
 import {getData, storeData} from "../../../utils/StoreManager";
-import {handleOpenWithLinking, handleOpenWithWebBrowser} from "../../../utils/WebBrowser";
+import {handleOpenWithLinking, handleOpenWithWebBrowser} from "../../../utils/BrowserLink";
+import getBooks from "../../../models/books";
+import getAuthor from "../../../models/author";
 
 export default function book({route, navigation}) {
     const { item } = route.params ;
     const [like, setLike] = useState(false);
+    let [ authors, setAuthors] = useState([]);
+    let [ authorsName, SetAuthorsName] = useState('');
+
+    useEffect(() => {
+        async function fetchData()  {
+            for (const authorId of item.fields['Author']) {
+                let author = await getAuthor(authorId) ;
+                authors.push(author);
+                authorsName += ' '+ author.fields['Name'];
+            }
+            setAuthors(authors);
+            SetAuthorsName(authorsName);
+        }
+        fetchData() ;
+    }, []);
 
     useEffect(()=>{
         async function getLike() {
@@ -26,22 +43,25 @@ export default function book({route, navigation}) {
 
     return (
         <View style={styles.container}>
+            <Header/>
             <StatusBar style="auto" />
-                <Header />
-                {item.fields["Cover Photo"] !== undefined && item.fields["Cover Photo"].length > 0 && <Image source={{uri: item.fields["Cover Photo"][0]["url"]}} style={styles.imageSize} />}
-                <View style={{ width: '100%', height: '90%'}}>
-                    <TouchableOpacity
-                        onPress={ handleOpenWithWebBrowser(item.fields["Wiki link"])}
-                        style={styles.button}
-                        >
-                        <Text>Wiki pour plus d'infos</Text>
-                    </TouchableOpacity>
+            <ScrollView style={{ width: '100%', height: '90%'}}>
+                <View>
+                    {item.fields["Cover Photo"] !== undefined && item.fields["Cover Photo"].length > 0 && <Image source={{uri: item.fields["Cover Photo"][0]["url"]}} style={styles.imageSize} />}
+                    <Text style={{fontSize: 20}}>{item.fields["Name"]}</Text>
+
+                </View>
+                    {/*<Button*/}
+                    {/*    title="Lien Wiki"*/}
+                    {/*    onPress={ handleOpenWithWebBrowser(item.fields["Wiki link"])}*/}
+                    {/*>*/}
+                    {/*</Button>*/}
                     <Text>{item.fields["Wiki link"]}</Text>
                     <TouchableOpacity onPress={() => { isLike(!like)}}><Text>{like ? 'Ne plus mettre en favoris' : 'Mettre en favoris'}</Text></TouchableOpacity>
-                    <Text>{item.fields["Name"]}</Text>
+                    <Text style={{fontSize: 18}}>Auteur: {authorsName}</Text>
                     <Text>{item.fields["Synopsis"]}</Text>
-                    <Text>Auteur : {item.fields["Author"]}</Text>
-                </View>
+
+                </ScrollView>
         </View>
     );
 }

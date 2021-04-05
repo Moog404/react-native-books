@@ -33,8 +33,6 @@ export default function books({route, navigation}) {
                             </View>
                             <View>
                                 <Text style={{fontSize: 18}}>{item.fields["Name"]}</Text>
-                                <Text>{item.fields["Author"]}</Text>
-                                {/*<Text>{item.fields["Synopsis"]}</Text>*/}
                             </View>
                         </View>
                     </TouchableHighlight>

@@ -2,9 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity, TouchableHighlight, FlatList } from 'react-native';
 import styles from './styles';
-import Header from "../../composants/Header";
 import Book from "../../composants/Book";
-
 import getBooks from "../../../models/books";
 
 export default function books({route, navigation}) {
@@ -25,10 +23,10 @@ export default function books({route, navigation}) {
             <View style={{ width: '100%', height: '95%'}}>
                 <FlatList
                     data={books}
-                    renderItem={({ item, index, separators }) => (
+                    renderItem={({ item }) => (
                     <TouchableHighlight
                       key={item.key}
-                        onPress={() => navigation.navigate('book', { item })}>
+                        onPress={() => navigation.navigate('Livre', { item })}>
                         <Book
                             cover={item.fields["Cover Photo"]}
                             name={item.fields["Name"]}

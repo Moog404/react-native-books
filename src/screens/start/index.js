@@ -6,13 +6,13 @@ import Header from "../../composants/Header";
 
 export default function index({navigation}) {
     useEffect(() => {
-        navigation.navigate('books');
+        navigation.navigate('Livres');
     }, []);
 
     return (
         <View style={styles.container}>
-            {<Button onPress={() => navigation.navigate('books')} title={"Afficher les livres !"} />}
-            {<Button onPress={() => navigation.navigate('home')} title={"homepage !"} />}
+            {<Button onPress={() => navigation.navigate('Livres')} title={"Afficher les livres !"} />}
+            {<Button onPress={() => navigation.navigate('Accueil')} title={"homepage !"} />}
             <StatusBar style="auto" />
         </View>
     );

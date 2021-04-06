@@ -43,25 +43,22 @@ export default function book({route, navigation}) {
 
     return (
         <View style={styles.container}>
-            <Header/>
             <StatusBar style="auto" />
             <ScrollView style={{ width: '100%', height: '90%'}}>
                 <View>
                     {item.fields["Cover Photo"] !== undefined && item.fields["Cover Photo"].length > 0 && <Image source={{uri: item.fields["Cover Photo"][0]["url"]}} style={styles.imageSize} />}
                     <Text style={{fontSize: 20}}>{item.fields["Name"]}</Text>
-
                 </View>
-                    {/*<Button*/}
-                    {/*    title="Lien Wiki"*/}
-                    {/*    onPress={ handleOpenWithWebBrowser(item.fields["Wiki link"])}*/}
-                    {/*>*/}
-                    {/*</Button>*/}
+                    <Button
+                        title="Lien Wiki"
+                        onPress={() => handleOpenWithLinking(item.fields["Wiki link"])}
+                    >
+                    </Button>
                     <Text>{item.fields["Wiki link"]}</Text>
                     <TouchableOpacity onPress={() => { isLike(!like)}}><Text>{like ? 'Ne plus mettre en favoris' : 'Mettre en favoris'}</Text></TouchableOpacity>
                     <Text style={{fontSize: 18}}>Auteur: {authorsName}</Text>
                     <Text>{item.fields["Synopsis"]}</Text>
-
-                </ScrollView>
+            </ScrollView>
         </View>
     );
 }

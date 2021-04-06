@@ -26,7 +26,7 @@ export default function books({route, navigation}) {
                     renderItem={({ item }) => (
                     <TouchableHighlight
                       key={item.key}
-                        onPress={() => navigation.navigate('Livre', { item })}>
+                        onPress={() => navigation.navigate('book', { item })}>
                         <Book
                             cover={item.fields["Cover Photo"]}
                             name={item.fields["Name"]}

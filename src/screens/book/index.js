@@ -7,6 +7,7 @@ import {getData, storeData} from "../../../utils/StoreManager";
 import {handleOpenWithLinking, handleOpenWithWebBrowser} from "../../../utils/BrowserLink";
 import getBooks from "../../../models/books";
 import getAuthor from "../../../models/author";
+import ImagePickerExample from "../../composants/imagePicker";
 
 export default function book({route, navigation}) {
     const { item } = route.params ;
@@ -49,7 +50,9 @@ export default function book({route, navigation}) {
                     {item.fields["Cover Photo"] !== undefined && item.fields["Cover Photo"].length > 0 && <Image source={{uri: item.fields["Cover Photo"][0]["url"]}} style={styles.imageSize} />}
                     <Text style={{fontSize: 20}}>{item.fields["Name"]}</Text>
                 </View>
-                    <Button
+                <ImagePickerExample/>
+
+                <Button
                         title="Lien Wiki"
                         onPress={() => handleOpenWithLinking(item.fields["Wiki link"])}
                     >

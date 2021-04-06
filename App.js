@@ -30,7 +30,7 @@ export default function App() {
 		return (
 			<BookStack.Navigator>
 				<BookStack.Screen name={"Livres"} component={books} />
-				<BookStack.Screen name={"Livre"} component={book} />
+				<BookStack.Screen name={"book"} component={book} />
 			</BookStack.Navigator>
 		);
 	}
